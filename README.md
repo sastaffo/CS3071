@@ -1,15 +1,15 @@
-#CS3071
+# CS3071
 
-##3rd Year Compiler Design module using flex and bison
+## 3rd Year Compiler Design module using flex and bison
 
 ___
 
-###Assignment 1: even.l
+### Assignment 1: even.l
 Write a flex program even.l which takes a sequence of integers as its input and outputs a count of the number of even integers a \n and no other characters.
 
 ___
 
-###Assignment 2: comments.l
+### Assignment 2: comments.l
 Write a flex program comments.l which removes comments from a slightly odd programming language and sends the remaining code to its output.
 
 ** means regard the two asterisks and all following characters on that line up to a \\n as comment.
@@ -28,7 +28,7 @@ there's no facility to put a double-quote inside a string.
 
 ___
 
-###Assignment 3: plates.l
+### Assignment 3: plates.l
 Write a flex program that reads a whitespace (space tab or newline) seperated list of Irish car registration numbers and outputs the number of years since registration followed by a new line for each one.
 
 If an invalid registration is detected the program should output the word "*INVALID*" followed by a newline character.
