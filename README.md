@@ -90,8 +90,8 @@ Tag  | County/City
 *W*  | Waterford City
 *WD* | County Waterford
 
-Note you can define sub-parts of regular expressions in the definitions section and then
-use these in the rule:
+Note you can define sub-parts of regular expressions in the definitions section and then use these in the rule:
+
 ```
 NUMBER  [0-9]...
 COUNTY  KK|...
