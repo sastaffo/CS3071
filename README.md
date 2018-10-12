@@ -14,17 +14,17 @@ ___
 
 Write a flex program comments.l which removes comments from a slightly odd programming language and sends the remaining code to its output.
 
-** means regard the two asterisks and all following characters on that line up to a \\n as comment.
+__**__ means regard the two asterisks and all following characters on that line up to a *\\n* as comment.
 
-anything between { and } is comment, potentially across multiple lines.
+anything between **{** and **}** is comment, potentially across multiple lines.
 
-a { inside a comment is just part of the comment.
+a **{** inside a comment is just part of the comment.
 
-a { not followed by } is regarded as a syntax error and your program should output the phrase "syntax error\n" in place of the remaining input and exit when it detects this.
+a **{** not followed by **}** is regarded as a syntax error and your program should output the phrase "*syntax error\n*" in place of the remaining input and exit when it detects this.
 
-a } not preceded by a matching { is regarded as a syntax error and your program should output the phrase "syntax error\n" and exit at this place.
+a **}** not preceded by a matching **{** is regarded as a syntax error and your program should output the phrase "*syntax error\n*" and exit at this place.
 
-between double-quote characters {} and ** are regarded as part of a string and dont indicate comments.
+between double-quote characters **{}** and __**__ are regarded as part of a string and dont indicate comments.
 
 there's no facility to put a double-quote inside a string.
 
