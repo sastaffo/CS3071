@@ -57,3 +57,9 @@ cntyNew ("C"|"CE"|"CN"|"CW"|"D"|"DL"|"G"|"KE"|"KK"|"KY"|"L"|"LD"|"LH"|"LM"|"LS"|
 {invalid} {printf("INVALID\n");}
 .* { printf("INVALID\n"); }
 %%
+
+int main()
+{
+  yylex();
+  return 0;
+}

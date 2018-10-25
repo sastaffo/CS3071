@@ -27,8 +27,7 @@ void yyerror(char *s)
 }
 
 
-int
-main()
+int main()
 {
 //  yydebug = 1;
   yyparse();
