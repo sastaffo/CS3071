@@ -11,8 +11,9 @@ void printRoman(int x);
 
 %%
 
-input: /*empty*/
-     | input expr       { printRoman($2); }
+input: /*empty*/        { }
+     | input expr EOL   { printRoman($2); }
+     | input EOL        { }
      ;
 
 expr : fact             { $$ = $1; }
@@ -85,10 +86,7 @@ _iii : I I I            { $$ = 3; }
 %%
 int main()
 {
-    int x = 1499;
-    printf("%d => ", x);
-    printRoman(x);
-    //yyparse();
+    yyparse();
     return 0;
 }
 void yyerror(char *s)
