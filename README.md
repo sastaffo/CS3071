@@ -114,3 +114,9 @@ ___
 see folder for brief
 
 ___
+
+### Assignment 6: t6-calcwithvariables
+
+see folder for brief
+
+___
