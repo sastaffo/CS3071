@@ -1,4 +1,4 @@
-## Assignment 6 calcwithvariables.l and calcwithvariables.y
+### Assignment 6 calcwithvariables.l, calcwithvariables.y
 
 Implement a calculator using Bison that supports variables. Variables can be any of the 26 lower case letters. Numbers can be in the range zero to nine.
 
