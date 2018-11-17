@@ -2,11 +2,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-int asciiA = 0x61;
 int variables[26];
 void yyerror(char *s);
-int lookup(char var);
-void assign(char var, int val);
+int get(int index);
+void put(int index, int val);
 %}
 /*declare tokens*/
 %token VAR NUM
@@ -14,30 +13,40 @@ void assign(char var, int val);
 %token ASMT PRINT EOL
 
 %%
+input : /*nothing*/
+      | input EOL {}
+      | input statement EOL {}
+      ;
 
-statement: assign EOL {}
-         | PRINT VAR EOL { printf("%d\n", lookup($2));}
+statement: VAR ASMT expr_u { put($1, $3); }
+         | PRINT VAR      { printf("%d\n", get($2));}
          ;
 
-assign : VAR ASMT expr { assign($1, $3); }
+expr_u : expr     { $$ = $1; }
+       | SUB expr { $$ = $2 * -1; }
+       ;
+expr   : fact           { $$ = $1; }
+       | expr_u ADD fact_u { $$ = $1 + $3; }
+       | expr_u SUB fact_u { $$ = $1 - $3; }
        ;
 
-expr : fact          { $$ = $1; }
-     | expr ADD fact { $$ = $1 + $3; }
-     | expr SUB fact { $$ = $1 - $3; }
-     ;
+fact_u : fact { $$ = $1; }
+       | SUB fact { $$ = $2 * -1; }
+       ;
+fact   : term_u            { $$ = $1; }
+       | fact_u MUL term_u { $$ = $1 * $3; }
+       | fact_u DIV term_u { if ($3==0) yyerror("cannot divide by 0");
+                           else $$ = $1 / $3;
+                         }
+       ;
 
-fact : term          { $$ = $1; }
-     | fact MUL term { $$ = $1 * $3; }
-     | fact DIV term { if ($3==0) yyerror("cannot divide by 0");
-                       $$ = $1 / $3;
-                     }
-     ;
-
-term : NUM          { $$ = $1; }
-     | VAR          { $$ = lookup($1); }
-     | OBR expr CBR { $$ = $2; }
-     ;
+term_u : term { $$ = $1; }
+       | SUB term { $$ = $2 * -1; }
+       ;
+term   : NUM           { $$ = $1; }
+       | VAR           { $$ = get($1); }
+       | OBR expr_u CBR { $$ = $2; }
+       ;
 
 
 %%
@@ -53,15 +62,15 @@ void yyerror(char *s)
     exit(0);
 }
 
-int lookup(char var)
+int get(int index)
 {
-    int index = var - asciiA;
     int val = variables[index];
+    //printf("getting [%d] = %d\n", index, val);
     return val;
 }
 
-void assign(char var, int val)
+void put(int index, int val)
 {
-    int index = var - asciiA;
     variables[index] = val;
+    //printf("putting [%d] = %d\n", index, val);
 }

@@ -1,11 +1,13 @@
 %option noyywrap nodefault yylineno
 %{
-//# include "roman.h"
 # include "calcwithvariables.tab.h"
 void yyerror(char *s);
+int getIndex(char var);
+int asciiA = 0x61;
 %}
 
 %%
+[ \t\n]
 \+    { return ADD; }
 \-    { return SUB; }
 \*    { return MUL; }
@@ -16,13 +18,18 @@ void yyerror(char *s);
 
 print { return PRINT; }
 [0-9] { yylval = atoi(yytext); return NUM; }
-[a-z] { return VAR;}
+[a-z] { yylval = getIndex(yytext[0]); return VAR;}
 
 ;     { return EOL; }
-\n    { }
-\s    { }
 .     {
-        yyerror("LEX: syntax error");
+        yyerror("syntax error");
       }
 
 %%
+
+int getIndex(char var)
+{
+    int index = var - asciiA;
+    //printf("index: %c -> %d\n", var, index);
+    return index;
+}
